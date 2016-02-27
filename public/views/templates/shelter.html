@@ -1,0 +1,12 @@
+<form class="form" name="zipForm">
+    <label>
+        Please enter your zip code:
+        <input class="label" type="number" name="input" ng-model="zip.value" minlength="5" maxlength="5" required><button ng-click="petFinder()">Submit</button>
+    </label>
+</form>
+<div class="shelter" ng-repeat="shelter in shelter">
+    <h2>{{shelter.name.$t}}</h2>
+    <p>{{shelter.address1.$t}}, {{shelter.city.$t}}, {{shelter.state.$t}} {{shelter.zip.$t}}</p>
+    <p>{{shelter.phone.$t}}</p>
+    <hr />
+</div>
