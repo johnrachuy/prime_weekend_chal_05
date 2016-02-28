@@ -1,21 +1,27 @@
-<select name="animalSelect" id="animalSelect" ng-model="animal.animalSelect">
-    <option value="">---Please select---</option> <!-- not selected / blank option -->
-    <option value="dog">Dog</option>
-    <option value="cat">Cat</option>
-    <option value="rabbit">Rabbit</option>
-    <option value="smallfurry">Small &amp Furry</option>
-    <option value="horse">Horse</option>
-    <option value="bird">Bird</option>
-    <option value="reptile">Scales, Fins &amp Others</option>
-    <option value="pig">Pig</option>
-    <option value="barnyard">Barnyard</option>
-</select><br>
-<button ng-click="petFinder()">Find Your Next Animal</button><br>
+<div>
+    <select name="animalSelect" ng-change="petFinder()" ng-model="animal">
+        <option value="">---Please select---</option>
+        <option value="dog">Dog</option>
+        <option value="cat">Cat</option>
+        <option value="rabbit">Rabbit</option>
+        <option value="smallfurry">Small &amp Furry</option>
+        <option value="horse">Horse</option>
+        <option value="bird">Bird</option>
+        <option value="reptile">Scales, Fins &amp Others</option>
+        <option value="pig">Pig</option>
+        <option value="barnyard">Barnyard</option>
+    </select><br>
+</div>
+
+<div>
+<button ng-click="favorite()">Add to Favorites</button><br>
+</div>
 
 <div class="animal">
     <h2>{{animal.name.$t}}</h2>
-    <h3>{{animal.contact.city.$t}}, {{animal.contact.state.$t}} | {{animal.contact.phone.$t}}</h3>
+    <h3>{{animal.contact.city.$t}} {{animal.contact.state.$t}} {{animal.contact.phone.$t}}</h3>
     <img src="{{animal.media.photos.photo[2].$t}}" height="400px"></img>
+    <p>{{animal.description.$t}}</p>
     <!--<br><button class="info_button" ng-click="showInfo()">Click to see more about me!</button>-->
     <!--<br><p ng-show="showThis">{{animal.description.$t}}</p>-->
 </div>
