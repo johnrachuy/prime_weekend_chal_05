@@ -12,7 +12,7 @@ app.post('/post_fav', function(req, res) {
     var addEntry = {
         name: req.body.name.$t,
         image: req.body.media.photos.photo[2].$t,
-        description:req.body.description.$t.substring(0, 99),
+        description: req.body.description.$t.substring(0, 99),
         type: req.body.animal.$t,
         deleted: "FALSE"
     };
@@ -29,6 +29,31 @@ app.post('/post_fav', function(req, res) {
                     res.send(result);
                 }
             });
+    });
+});
+
+app.get('/get_fav', function(req, res) {
+    var results = [];
+
+    pg.connect(connectionString, function(err, client, done) {
+        var query = client.query('SELECT * FROM animal');
+
+        // Stream results back one row at a time
+        query.on('row', function(row) {
+            results.push(row);
+        });
+
+        // close connection
+        query.on('end', function() {
+            done();
+            console.log(results);
+            return res.json(results);
+
+        });
+
+        if(err) {
+            console.log(err);
+        }
     });
 });
 
