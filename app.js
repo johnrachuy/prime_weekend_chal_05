@@ -7,7 +7,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.post('/post_fav', function(req, res) {
-    console.log(req);
+    //console.log(req);
 
     var addEntry = {
         name: req.body.name.$t,
@@ -36,7 +36,7 @@ app.get('/get_fav', function(req, res) {
     var results = [];
 
     pg.connect(connectionString, function(err, client, done) {
-        var query = client.query('SELECT * FROM animal');
+        var query = client.query('SELECT * FROM animal WHERE deleted = FALSE');
 
         // Stream results back one row at a time
         query.on('row', function(row) {
@@ -54,6 +54,28 @@ app.get('/get_fav', function(req, res) {
         if(err) {
             console.log(err);
         }
+    });
+});
+
+app.put('/remove_fav', function(req, res) {
+    console.log(req.body.id);
+
+    var updateEntry = {
+        id: req.body.id
+    };
+
+    pg.connect(connectionString, function(err, client, done) {
+        client.query("UPDATE animal SET deleted = NOT deleted WHERE id = ($1)",
+            [updateEntry.id],
+            function (err, result) {
+                done();
+                if(err) {
+                    console.log("Error inserting data: ", err);
+                    res.send(false);
+                } else {
+                    res.send(result);
+                }
+            });
     });
 });
 

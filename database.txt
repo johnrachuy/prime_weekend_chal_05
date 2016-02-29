@@ -6,5 +6,5 @@ CREATE TABLE animal
         description character varying(100) NOT NULL,
         type character varying(100) NOT NULL,
         deleted BOOLEAN NOT NULL,
-        CONSTRAINT people_pkey PRIMARY KEY (id)
+        CONSTRAINT animal_pkey PRIMARY KEY (id)
     );

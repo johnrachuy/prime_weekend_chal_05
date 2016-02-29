@@ -14,4 +14,15 @@ myApp.controller('FavoriteController', ['$scope', '$http', function($scope, $htt
         $scope.animal = response.data;
     });
 
+    $scope.remove = function(id) {
+        removeFavorite(id);
+        console.log(id);
+    }
+
+    function removeFavorite(data) {
+        $http.put('/remove_fav', {id:data}).then(function(response) {
+
+        });
+    };
+
 }]);
