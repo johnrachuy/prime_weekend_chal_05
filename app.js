@@ -46,7 +46,7 @@ app.get('/get_fav', function(req, res) {
         // close connection
         query.on('end', function() {
             done();
-            console.log(results);
+            //console.log(results);
             return res.json(results);
 
         });
